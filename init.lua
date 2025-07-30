@@ -164,14 +164,14 @@ vim.diagnostic.config({
 -- LSP
 local cmp = require('cmp')
 local lspkind = require('lspkind')
+local types = require('cmp.types')
 
 cmp.setup({
   mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['<Tab>'] = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
+    ['<Enter>'] = cmp.mapping.confirm({ select = false }),
+    ['<Esc>'] = cmp.mapping.abort(),
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -245,23 +245,29 @@ vim.opt.autoindent = true         -- Copy indent from current line when starting
 vim.opt.statusline = '%F%=%{v:lua.getDiagnosisCounts()}'
 -- Turn off mouse
 vim.opt.mouse = ''
--- Move between windows
+
+-- Split windows
+keymap('n', '<leader>v', '<cmd>:vsplit<CR>', { desc = 'Split vertical' })
+keymap('n', '<leader>h', '<cmd>:split<CR>', { desc = 'Split horizontal' })
+keymap('n', '<leader>c', '<cmd>:close<CR>', { desc = 'Close current split window' })
+
+-- Move between split windows
 keymap('n', '<C-h>', '<C-w>h', { desc = 'Move to left window' })
 keymap('n', '<C-j>', '<C-w>j', { desc = 'Move to down window' })
 keymap('n', '<C-k>', '<C-w>k', { desc = 'Move to up window' })
 keymap('n', '<C-l>', '<C-w>l', { desc = 'Move to right window' })
 
--- Resize windows
+-- Resize split windows
 keymap('n', '<C-A-k>', '<cmd>resize +2<CR>', { desc = 'Increase window height' })
 keymap('n', '<C-A-j>', '<cmd>resize -2<CR>', { desc = 'Decrease window height' })
 keymap('n', '<C-A-h>', '<cmd>vertical resize -2<CR>', { desc = 'Decrease window width' })
 keymap('n', '<C-A-l>', '<cmd>vertical resize +2<CR>', { desc = 'Increase window width' })
 
 -- Open new tab
-keymap('n', '<C-t>', '<cmd>tabnew<CR>', { desc = 'Open new tab' })
+keymap('n', '<leader><Tab>', '<cmd>tabnew<CR>', { desc = 'Open new tab' })
 
 -- Close current tab (using a safe keybinding)
-keymap('n', '<C-w>', '<cmd>tabclose<CR>', { desc = 'Close current tab' })
+keymap('n', '<leader>x', '<cmd>bd<CR>', { desc = 'Close current tab' })
 
 -- Navigate tabs
 keymap('n', '<Tab>', '<cmd>tabnext<CR>', { desc = 'Go to next tab' })
