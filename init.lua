@@ -17,13 +17,28 @@ vim.opt.rtp:prepend(lazypath)
 -- plugin install
 require('lazy').setup({
   -- The tokyonight.nvim colorscheme
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSRuntimeSync',
+    config = function()
+      require('nvim-treesitter.configs').setup({
+        -- Add svelte to this list
+        ensure_installed = { 'lua', 'javascript', 'typescript', 'html', 'css', 'svelte', 'prisma', 'bash' },
+        sync_install = false,
+        auto_install = true,
+        highlight = {
+          enable = true,
+        },
+      })
+    end,
+  },
   { 'nvim-tree/nvim-web-devicons', lazy = true },
-   {
-      'nvim-telescope/telescope.nvim',
-      tag = '0.1.6', -- Pin to a stable version
-      dependencies = { 'nvim-lua/plenary.nvim' },
-      config = function()
-        -- This is where you would configure telescope, if you wanted to
+  {
+    'nvim-telescope/telescope.nvim',
+    tag = '0.1.6', -- Pin to a stable version
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      -- This is where you would configure telescope, if you wanted to
         -- For now, we'll just load the fzf extension
         require('telescope').setup({
           defaults = {
@@ -65,9 +80,8 @@ require('lazy').setup({
   -- Smooth scrolling
   {
     'karb94/neoscroll.nvim', opts = {
-      duration_multiplier = 2
-    }
-  },
+    },
+ },
   -- The completion engine
   { 'hrsh7th/nvim-cmp' },
   -- Source for nvim-cmp: buffer words
@@ -89,6 +103,19 @@ require('lazy').setup({
 })
 
 local keymap = vim.keymap.set
+
+local neoscroll = require('neoscroll')
+
+local _keymap = {
+  ["<C-u>"] = function() neoscroll.scroll(-0.15, { duration = 100 }) end;
+  ["<C-d>"] = function() neoscroll.scroll(0.15, { duration = 100 }) end;
+}
+
+local modes = { 'n', 'v', 'x' }
+
+for key, func in pairs(_keymap) do
+  keymap(modes, key, func)
+end
 
 -- Key mappings
 vim.g.mapleader = ' '
@@ -137,7 +164,6 @@ cmp.setup({
     ['<Tab>'] = cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Select }),
     ['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Select }),
     ['<Enter>'] = cmp.mapping.confirm({ select = false }),
-    ['<Esc>'] = cmp.mapping.abort(),
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
