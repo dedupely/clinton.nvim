@@ -19,7 +19,6 @@ require('lazy').setup({
   -- The tokyonight.nvim colorscheme
   {
     'nvim-treesitter/nvim-treesitter',
-    build = ':TSRuntimeSync',
     config = function()
       require('nvim-treesitter.configs').setup({
         -- Add svelte to this list
@@ -29,6 +28,7 @@ require('lazy').setup({
         highlight = {
           enable = true,
         },
+        indent = { enable = true }
       })
     end,
   },
