@@ -18,38 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- The tokyonight.nvim colorscheme
   { 'nvim-tree/nvim-web-devicons', lazy = true },
-  {
-    'akinsho/bufferline.nvim',
-    version = "*", -- Pin to the latest version
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      -- The configuration for bufferline goes here
-      -- We will fill this in during Step 2
-      ---- Inside the config = function() for bufferline
-        require('bufferline').setup({
-          options = {
-            -- This is the indicator for a modified buffer
-            -- A dot ● is a common choice
-            modified_icon = '●',
-
-            -- Other nice options:
-            separator_style = "slant", -- Adds a cool separator shape
-            diagnostics = "nvim_lsp", -- Shows LSP errors/warnings
-
-            -- This is important, otherwise the bufferline disappears
-            -- when you only have one buffer open.
-            always_show_bufferline = true,
-          }
-        })
-      end
-    },
-    {
-      'nvim-tree/nvim-tree.lua', version = "*", dependencies = { 'nvim-tree/nvim-web-devicons' },
-      config = function()
-        require("nvim-tree").setup()
-      end,
-    },
-    {
+   {
       'nvim-telescope/telescope.nvim',
       tag = '0.1.6', -- Pin to a stable version
       dependencies = { 'nvim-lua/plenary.nvim' },
@@ -128,11 +97,8 @@ vim.g.localleader = ' '
 -- Telescope
 local builtin = require('telescope.builtin')
 
-keymap('n', '<leader>ff', builtin.find_files, { desc = 'Find files' })
-keymap('n', '<leader>fg', builtin.live_grep, { desc = 'Live grep' })
-
--- File tree
-keymap('n', '<leader>e', '<cmd>NvimTreeToggle<CR>', { desc = 'Toggle file explorer' })
+keymap('n', '<leader>f', builtin.find_files, { desc = 'Find files' })
+keymap('n', '<leader>g', builtin.live_grep, { desc = 'Live grep' })
 
 -- Toggle floating terminal
 keymap('n', '<leader>t', '<cmd>ToggleTerm<CR>', { desc = 'Toggle terminal' })
@@ -223,6 +189,7 @@ vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.termguicolors = true      -- Enable true color support
 vim.opt.syntax = 'on'             -- Enable syntax highlighting
+vim.o.showtabline = 0
 
 -- Line numbers that one can see
 vim.api.nvim_set_hl(0, 'LineNr', { fg = 'gray', bold = true })
@@ -243,7 +210,7 @@ vim.opt.expandtab = true          -- Use spaces instead of tabs
 vim.opt.autoindent = true         -- Copy indent from current line when starting a new line
 
 -- Status bar
-vim.opt.statusline = '%F%=%{v:lua.getDiagnosisCounts()}'
+vim.opt.statusline = '%F%=%{v:lua.GetDiagnosisCounts()}'
 -- Turn off mouse
 vim.opt.mouse = ''
 
