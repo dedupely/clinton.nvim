@@ -17,18 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 -- plugin install
 require('lazy').setup({
   {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons", -- Optional, for file icons
-    },
-    config = function()
-      -- This function will run after the plugin is loaded
-      -- We'll add configuration here in the next step
-      require("nvim-tree").setup({})
-    end,
-  },
-  {
     'nvim-treesitter/nvim-treesitter',
     config = function()
       require('nvim-treesitter.configs').setup({
@@ -131,13 +119,6 @@ local modes = { 'n', 'v', 'x' }
 for key, func in pairs(_keymap) do
   keymap(modes, key, func)
 end
-
--- Neo Tree
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", {
-  noremap = true,
-  silent = true,
-  desc = "Toggle file explorer"
-})
 
 -- Telescope
 local builtin = require('telescope.builtin')
