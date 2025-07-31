@@ -197,7 +197,7 @@ require('mason-lspconfig').setup({
 })
 
 -- Diagnosis Counts
-function getDiagnosisCounts()
+function GetDiagnosisCounts()
     -- Get counts for errors and warnings in the current buffer
   local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
   local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
@@ -233,6 +233,7 @@ vim.opt.hlsearch = true           -- Highlight search results
 vim.opt.incsearch = true          -- Show search results as you type
 vim.opt.ignorecase = true         -- Ignore case in search
 vim.opt.smartcase = true          -- But be case-sensitive if the query has uppercase letters
+vim.o.confirm = true
 
 -- Tabs & Indentation
 vim.opt.tabstop = 2               -- Number of spaces a <Tab> in the file counts for
@@ -246,30 +247,9 @@ vim.opt.statusline = '%F%=%{v:lua.getDiagnosisCounts()}'
 -- Turn off mouse
 vim.opt.mouse = ''
 
--- Split windows
-keymap('n', '<leader>v', '<cmd>:vsplit<CR>', { desc = 'Split vertical' })
-keymap('n', '<leader>h', '<cmd>:split<CR>', { desc = 'Split horizontal' })
-keymap('n', '<leader>c', '<cmd>:close<CR>', { desc = 'Close current split window' })
+-- See open buffers
+keymap('n', '<leader>b', '<cmd>Telescope buffers<CR>', { desc = 'Open new tab' })
 
--- Move between split windows
-keymap('n', '<C-h>', '<C-w>h', { desc = 'Move to left window' })
-keymap('n', '<C-j>', '<C-w>j', { desc = 'Move to down window' })
-keymap('n', '<C-k>', '<C-w>k', { desc = 'Move to up window' })
-keymap('n', '<C-l>', '<C-w>l', { desc = 'Move to right window' })
-
--- Resize split windows
-keymap('n', '<C-A-k>', '<cmd>resize +2<CR>', { desc = 'Increase window height' })
-keymap('n', '<C-A-j>', '<cmd>resize -2<CR>', { desc = 'Decrease window height' })
-keymap('n', '<C-A-h>', '<cmd>vertical resize -2<CR>', { desc = 'Decrease window width' })
-keymap('n', '<C-A-l>', '<cmd>vertical resize +2<CR>', { desc = 'Increase window width' })
-
--- Open new tab
-keymap('n', '<leader><Tab>', '<cmd>tabnew<CR>', { desc = 'Open new tab' })
-
--- Close current tab (using a safe keybinding)
-keymap('n', '<leader>x', '<cmd>bd<CR>', { desc = 'Close current tab' })
-
--- Navigate tabs
-keymap('n', '<Tab>', '<cmd>tabnext<CR>', { desc = 'Go to next tab' })
-keymap('n', '<S-Tab>', '<cmd>tabprevious<CR>', { desc = 'Go to previous tab' })
-
+-- Navigate between buffers
+keymap('n', '<Tab>', '<cmd>bnext<CR>', { desc = 'Go to next buffer' })
+keymap('n', '<S-Tab>', '<cmd>bprevious<CR>', { desc = 'Go to previous buffer' })
