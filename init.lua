@@ -42,7 +42,7 @@ require('lazy').setup({
         -- For now, we'll just load the fzf extension
         require('telescope').setup({
           defaults = {
-            path_display = { 'filename_first' },
+            path_display = { 'smart' },
             layout_strategy = "horizontal",
             layout_config = {
               horizontal = {
