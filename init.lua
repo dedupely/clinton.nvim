@@ -17,15 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 -- plugin install
 require('lazy').setup({
   {
-    "rachartier/tiny-inline-diagnostic.nvim",
-    event = "VeryLazy", -- Or `LspAttach`
-    priority = 1000, -- needs to be loaded in first
-    config = function()
-      require('tiny-inline-diagnostic').setup()
-      vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
-    end
-  },
-  {
     'nvim-treesitter/nvim-treesitter',
     config = function()
       require('nvim-treesitter.configs').setup({
@@ -60,12 +51,6 @@ require('lazy').setup({
       'nvim-telescope/telescope-fzf-native.nvim',
       -- This is a build command that lazy.nvim will run
       build = 'make',
-    },
-    {
-      'folke/tokyonight.nvim',
-      lazy = false,    -- make sure we load this during startup
-      priority = 1000, -- make sure to load this before all other start plugins
-      opts = {},       -- pass any options to the plugin
     },
     { 'lukas-reineke/indent-blankline.nvim', main = 'ibl', opts = {} },
     { 'akinsho/toggleterm.nvim', version = "*", 
@@ -164,9 +149,16 @@ cmp.setup({
     ['<Enter>'] = cmp.mapping.confirm({ select = false }),
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
+    {
+      name = 'nvim_lsp',
+      entry_filter = function(entry)
+        local kind = entry:get_kind()
+        return kind ~= types.lsp.CompletionItemKind.Text
+           and kind ~= types.lsp.CompletionItemKind.Keyword
+           and kind ~= types.lsp.CompletionItemKind.Constant
+      end
+    },
   }, {
-    { name = 'buffer' },
     { name = 'path' },
   }),
   formatting = {
@@ -208,8 +200,10 @@ function GetDiagnosisCounts()
 end
 
 -- Appearance
-vim.cmd.colorscheme 'tokyonight'
+vim.cmd.colorscheme 'habamax'
 vim.opt.number = true
+vim.opt.relativenumber = true
+
 vim.opt.cursorline = true
 vim.opt.termguicolors = true      -- Enable true color support
 vim.opt.syntax = 'on'             -- Enable syntax highlighting
