@@ -286,3 +286,47 @@ keymap('n', '<leader>b', '<cmd>Telescope buffers<CR>', { desc = 'Open new tab' }
 -- Navigate between buffers
 keymap('n', '<Tab>', '<cmd>bnext<CR>', { desc = 'Go to next buffer' })
 keymap('n', '<S-Tab>', '<cmd>bprevious<CR>', { desc = 'Go to previous buffer' })
+
+function _G.ExpandSnippetsNormal()
+  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+  local line = vim.api.nvim_get_current_line()
+
+  -- Find the word under the cursor
+  local start_col = col
+  while start_col > 0 and line:sub(start_col, start_col):match("[%w%+%.]") do
+    start_col = start_col - 1
+  end
+  start_col = start_col + 1
+
+  local end_col = col + 1
+  while end_col <= #line and line:sub(end_col, end_col):match("[%w%+%.]") do
+    end_col = end_col + 1
+  end
+
+  local word = line:sub(start_col, end_col - 1)
+
+  local snippets = {
+    ["+server.ts"] = [[
+import type { RequestHandler } from '@sveltejs/kit';
+
+export const GET: RequestHandler = async ({ url }) => {
+	return new Response('');
+};
+]],
+  }
+
+  local snippet = snippets[word]
+  if snippet then
+    local before = line:sub(1, start_col - 1)
+    local after = line:sub(end_col)
+    local new_lines = vim.split(before .. snippet .. after, "\n")
+
+    -- Replace the current line with the snippet
+    vim.api.nvim_buf_set_lines(0, row - 1, row, false, new_lines)
+  else
+    print("No snippet found for: " .. word)
+  end
+end
+
+-- Keybind for normal mode (leader + s)
+vim.keymap.set('i', '<Tab>', _G.ExpandSnippetsNormal, { desc = "Expand snippet" })
