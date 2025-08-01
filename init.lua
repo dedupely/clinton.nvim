@@ -324,9 +324,8 @@ export const GET: RequestHandler = async ({ url }) => {
     -- Replace the current line with the snippet
     vim.api.nvim_buf_set_lines(0, row - 1, row, false, new_lines)
   else
-    print("No snippet found for: " .. word)
+    print("No snippet found for that text")
   end
 end
-
 -- Keybind for normal mode (leader + s)
-vim.keymap.set('i', '<Tab>', _G.ExpandSnippetsNormal, { desc = "Expand snippet" })
+vim.keymap.set('n', '<leader>s', _G.ExpandSnippetsNormal, { desc = "Expand snippet" })
