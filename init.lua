@@ -130,6 +130,27 @@ vim.api.nvim_create_autocmd('TermOpen', {
   desc = 'Set terminal keymaps on open',
 })
 
+local Terminal = require("toggleterm.terminal").Terminal
+
+local function toggle_term_in_buf_dir()
+  local buf_dir = vim.fn.expand("%:p:h")
+  if vim.fn.isdirectory(buf_dir) == 1 then
+    local term = Terminal:new({
+      dir = buf_dir,
+      direction = "float", 
+      close_on_exit = true,
+      hidden = true,
+
+    })
+    term:toggle()
+  else
+    print("No valid directory for current buffer.")
+  end
+end
+
+-- Set your keybind (normal mode)
+keymap("n", "<leader>p", toggle_term_in_buf_dir, { noremap = true, silent = true, desc = 'Open floating terminal in current buffer directory' })
+
 vim.diagnostic.config({
   underline = true,
   virtual_text = true,
