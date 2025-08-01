@@ -178,25 +178,52 @@ require('mason-lspconfig').setup({
 	ensure_installed = { 'html', 'cssls', 'prismals', 'svelte', 'ts_ls', 'jsonls', 'lua_ls', 'bashls' }
 })
 
+keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Toggle diagnotic" })
+
 -- Diagnosis Counts
 function GetDiagnosisCounts()
-    -- Get counts for errors and warnings in the current buffer
-  local errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-  local warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+  -- Get counts for errors and warnings in the current buffer
+  local total = #vim.diagnostic.get(0)
 
-  if errors > 0 then
-    -- If there are errors, the status is red. Also show warning counts.
-    local parts = { "🔴 " .. errors }
-    if warnings > 0 then
-      table.insert(parts, "🟠 " .. warnings)
-    end
-    return table.concat(parts, " ") .. " "
-  elseif warnings > 0 then
-    -- If there are only warnings, the status is orange.
-    return "🟠 " .. warnings .. " "
+  if total > 0 then
+    return "🔴" .. tostring(total) .. " "
   else
     return ""
   end
+end
+
+function GetErrorLines()
+  local max_lines = 3
+  local bufnr = vim.api.nvim_get_current_buf()
+  -- Get all diagnostics for the buffer, filtered by severity = ERROR
+  local diagnostics = vim.diagnostic.get(bufnr)
+
+  if #diagnostics == 0 then
+    return ""
+  end
+
+  -- Collect unique line numbers (1-based)
+  local lines_seen = {}
+  local unique_lines = {}
+
+  for _, diag in ipairs(diagnostics) do
+    local line = diag.lnum + 1
+    if not lines_seen[line] then
+      lines_seen[line] = true
+      table.insert(unique_lines, line)
+      if #unique_lines == max_lines then
+        break
+      end
+    end
+  end
+
+  if #unique_lines == 0 then
+    return ""
+  end
+
+  table.sort(unique_lines) -- optional: sort lines ascending
+
+  return "Lines " .. table.concat(unique_lines, ", ") .. "... "
 end
 
 -- Appearance
@@ -228,7 +255,7 @@ vim.opt.expandtab = true          -- Use spaces instead of tabs
 vim.opt.autoindent = true         -- Copy indent from current line when starting a new line
 
 -- Status bar
-vim.opt.statusline = '%F%=%{v:lua.GetDiagnosisCounts()}'
+vim.opt.statusline = '%F%=%{v:lua.GetErrorLines()}%{v:lua.GetDiagnosisCounts()}'
 -- Turn off mouse
 vim.opt.mouse = ''
 
