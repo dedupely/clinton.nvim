@@ -7,6 +7,9 @@ My use of Neovim is very minimalist and very focused on defaults. I also forbid 
 **Disclaimer: Fork this if you want to use it. I constantly improve my configuration over time so this repo will change slightly.**
 
 ## My workflow
+### Few new bindings
+I want to have to remember only a few bindings. I'm not interested in re-learning 100 bindings. If I can't list the bindings one by one it's probably too many.
+
 ### No split screens
 I use the floating terminal instead of split screen. When I need two screens I open Neovim in a second monitor. I hate split screens with a passion and find that it overcomplicates my workflow to have to remember how to switch between editor screens when I already by habit switch between monitors and windows with my Hyperland setup.
 
