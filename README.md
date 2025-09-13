@@ -1,6 +1,32 @@
-# 🛠️ My Neovim Configuration
+# 🛠️ Clinton Neovim Configuration
 
 A modern, minimal, and fast Neovim setup powered by **Lazy.nvim**. This config is optimized for web development, LSP support, terminal workflows, and smooth navigation.
+
+My use of Neovim is very minimalist and very focused on defaults. I also forbid myself to fumble around split screens and tabs.
+
+**Disclaimer: Fork this if you want to use it. I constantly improve my configuration over time so this repo will change slightly.**
+
+## My workflow
+### No split screens
+I use the floating terminal instead of split screen. When I need two screens I open Neovim in a second monitor. I hate split screens with a passion and find that it overcomplicates my workflow to have to remember how to switch between editor screens when I already by habit switch between monitors and windows with my Hyperland setup.
+
+Hitting <leader>t to open a floating terminal, do what I need there, then :q is perfect and doesn't get in the way.
+
+### No tabs
+I switch between buffers instead of tabs (and close buffers when I no longer need them open). More than 3 buffers is usually too much.
+
+### No themes or fancy stuff
+Vim already has a bunch of native themes so there's no need to pack in a bunch of extra plugins and heavy downloads.
+
+### Vim fundie
+I try to stay very Vim original and not update key bindings for motions.
+
+I want to keep my Neovim setup working for me but also want to preserve the skill to open vi in a remote terminal without my config and not be completely lost.
+
+This is why I try to stay as Vim fundie as possible. Every new change is a new habit I need to learn and I try to avoid needing to reprogram my habits.
+
+### Plugins that save time
+I'm ok with plugins as long as they bring large productivity gains. You can see the plugins I use below. If I use a plugin it's because it's almost impossible to live without it.
 
 ---
 
