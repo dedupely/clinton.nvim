@@ -115,8 +115,19 @@ end
 -- Telescope
 local builtin = require('telescope.builtin')
 
+vim.api.nvim_create_user_command(
+  'LiveGrepFixed',
+  function()
+    builtin.live_grep({
+      -- This flag tells ripgrep (rg) to treat the pattern as a literal string.
+      additional_args = { '--fixed-strings' }
+    })
+  end,
+  { desc = 'Live Grep (Fixed Strings/No Regex)' }
+)
+
 keymap('n', '<leader>f', builtin.find_files, { desc = 'Find files' })
-keymap('n', '<leader>g', builtin.live_grep, { desc = 'Live grep' })
+keymap('n', '<leader>g', ':LiveGrepFixed<CR>', { desc = 'Live grep' })
 
 -- Toggle floating terminal
 keymap('n', '<leader>t', '<cmd>ToggleTerm<CR>', { desc = 'Toggle terminal' })
