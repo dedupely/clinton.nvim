@@ -16,6 +16,10 @@ vim.opt.rtp:prepend(lazypath)
 
 -- plugin install
 require('lazy').setup({
+  { 'mluders/comfy-line-numbers-nvim' },
+  { 'jghauser/mkdir.nvim' },
+  { 'petertriho/nvim-scrollbar' },
+  { 'rmagatti/auto-session' },
   {
     'nvim-treesitter/nvim-treesitter',
     config = function()
@@ -249,6 +253,7 @@ end
 
 -- Appearance
 vim.cmd.colorscheme 'habamax'
+vim.opt.clipboard = "unnamedplus"
 vim.opt.number = true
 vim.opt.relativenumber = true
 
