@@ -89,6 +89,11 @@ require('lazy').setup({
   { 'onsails/lspkind.nvim' },
 })
 
+require("comfy-line-numbers").setup();
+require("auto-session").setup();
+require("mkdir").setup();
+require("scrollbar").setup();
+
 local keymap = vim.keymap.set
 
 -- Key mappings
