@@ -35,6 +35,8 @@ I'm ok with plugins as long as they bring large productivity gains. You can see 
 
 ## 🔑 Key Mappings
 
+q and w have Q and W aliases because I keep accidentally hitting those.
+
 > `Leader key`: `<space>`
 
 ### 🔍 Telescope (Fuzzy Finder)
@@ -90,6 +92,9 @@ Plugins are managed with [`lazy.nvim`](https://github.com/folke/lazy.nvim).
 - [`indent-blankline.nvim`](https://github.com/lukas-reineke/indent-blankline.nvim) - Indentation guides
 - [`neoscroll.nvim`](https://github.com/karb94/neoscroll.nvim) - Smooth scrolling
 - [`toggleterm.nvim`](https://github.com/akinsho/toggleterm.nvim) - Floating and split terminal integration
+- Nvim Scrollbar
+- Auto Sessions
+- Comfy line numbers
 
 ### 🔍 Fuzzy Finder
 
