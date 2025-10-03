@@ -289,6 +289,12 @@ vim.opt.statusline = '%F%=%{v:lua.GetErrorLines()}%{v:lua.GetDiagnosisCounts()}'
 -- Turn off mouse
 vim.opt.mouse = ''
 
+-- Define :Q to run the existing :q command
+vim.api.nvim_create_user_command("Q", "quit", { nargs = 0 })
+
+-- Define :W to run the existing :w command
+vim.api.nvim_create_user_command("W", "write", { nargs = 0 })
+
 -- See open buffers
 keymap('n', '<leader>b', '<cmd>Telescope buffers<CR>', { desc = 'Open new tab' })
 
