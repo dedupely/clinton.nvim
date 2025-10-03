@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- plugin install
 require('lazy').setup({
-  { 'mluders/comfy-line-numbers-nvim' },
+  { 'mluders/comfy-line-numbers.nvim' },
   { 'jghauser/mkdir.nvim' },
   { 'petertriho/nvim-scrollbar' },
   { 'rmagatti/auto-session' },
