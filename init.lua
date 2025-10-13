@@ -89,6 +89,8 @@ require('lazy').setup({
   { 'onsails/lspkind.nvim' },
 })
 
+vim.o.sessionoptions = "localoptions"
+
 require("comfy-line-numbers").setup();
 require("auto-session").setup();
 require("scrollbar").setup();
