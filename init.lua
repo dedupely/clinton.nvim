@@ -89,7 +89,7 @@ require('lazy').setup({
   { 'onsails/lspkind.nvim' },
 })
 
-vim.o.sessionoptions = "localoptions"
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 require("comfy-line-numbers").setup();
 require("auto-session").setup();
