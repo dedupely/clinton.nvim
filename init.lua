@@ -46,11 +46,11 @@ require('lazy').setup({
         require('telescope').setup({
           defaults = {
             path_display = { 'smart' },
-          }
+          },
 	  old_results_history = {
             num_lines = 10, -- How many previous results to remember
             limit_per_picker = 100, -- Max number of lines to store per picker
-          },
+          }
         })
         require('telescope').load_extension('fzf')
 	require('telescope').load_extension('history')
