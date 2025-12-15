@@ -373,3 +373,24 @@ for _, key in ipairs(vertical_keys) do
     disable_motion('n', key, 'Disabled Single Line Move (Use count: e.g., 5j)')
     disable_motion('v', key, 'Disabled Single Line Select')
 end
+
+-- Define a function to simplify setting keymaps
+local map = vim.keymap.set
+
+-- Disable Arrow Keys in Normal Mode ('n')
+map('n', '<Up>', '<Nop>', { silent = true })
+map('n', '<Down>', '<Nop>', { silent = true })
+map('n', '<Left>', '<Nop>', { silent = true })
+map('n', '<Right>', '<Nop>', { silent = true })
+
+-- Disable Arrow Keys in Visual Mode ('v')
+map('v', '<Up>', '<Nop>', { silent = true })
+map('v', '<Down>', '<Nop>', { silent = true })
+map('v', '<Left>', '<Nop>', { silent = true })
+map('v', '<Right>', '<Nop>', { silent = true })
+
+-- Disable Arrow Keys in Visual Mode ('v')
+map('i', '<Up>', '<Nop>', { silent = true })
+map('i', '<Down>', '<Nop>', { silent = true })
+map('i', '<Left>', '<Nop>', { silent = true })
+map('i', '<Right>', '<Nop>', { silent = true })
