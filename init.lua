@@ -357,3 +357,19 @@ export const GET: RequestHandler = async ({ url }) => {
 end
 -- Keybind for normal mode (leader + s)
 vim.keymap.set('n', '<leader>s', _G.ExpandSnippetsNormal, { desc = "Expand snippet" })
+
+
+-- --- Disable H and L (Horizontal) ---
+local horizontal_keys = { 'h', 'l' }
+for _, key in ipairs(horizontal_keys) do
+    disable_motion('n', key, 'Disabled Horizontal Move')
+    disable_motion('v', key, 'Disabled Horizontal Select')
+end
+
+-- --- Disable J and K (Sequential Vertical) ---
+local vertical_keys = { 'j', 'k' }
+for _, key in ipairs(vertical_keys) do
+    -- Disables the single key press (sequential movement)
+    disable_motion('n', key, 'Disabled Single Line Move (Use count: e.g., 5j)')
+    disable_motion('v', key, 'Disabled Single Line Select')
+end
