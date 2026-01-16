@@ -44,7 +44,26 @@ require('lazy').setup({
         -- For now, we'll just load the fzf extension
         require('telescope').setup({
           defaults = {
-            path_display = { 'smart' },
+			path_display = { 'smart' },
+		    
+		    -- 1. Use Vertical Layout (Stacks windows)
+		    layout_strategy = 'vertical',
+		    
+		    -- 2. Configuration for the layout
+		    layout_config = {
+		      -- "Entire Screen" (95% of width/height)
+		      width = 0.95,
+		      height = 0.95,
+		      
+		      -- Specific settings for vertical mode
+		      vertical = {
+		        -- mirror = true puts the Search/Results on TOP and Preview on BOTTOM
+		        mirror = true,
+		        
+		        -- Adjust how much space the preview takes (0.6 = 60%)
+		        preview_height = 0.6,
+		      }
+		    },
           }
   	})
         require('telescope').load_extension('fzf')
