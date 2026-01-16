@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- plugin install
 require('lazy').setup({
-  -- { 'mluders/comfy-line-numbers.nvim' },
+  { 'mluders/comfy-line-numbers.nvim' },
   { 'jghauser/mkdir.nvim' },
   { 'petertriho/nvim-scrollbar' },
   { 'rmagatti/auto-session' },
@@ -109,7 +109,7 @@ require('lazy').setup({
 
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
---require("comfy-line-numbers").setup();
+require("comfy-line-numbers").setup();
 require("auto-session").setup();
 require("scrollbar").setup();
 
