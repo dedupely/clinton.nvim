@@ -241,8 +241,9 @@ keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "T
 
 -- Diagnosis Counts
 function GetDiagnosisCounts()
-  -- Get counts for errors and warnings in the current buffer
-  local total = #vim.diagnostic.get(0)
+  -- Get counts for ONLY ERRORS in the current buffer
+  local errors = vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+  local total = #errors
 
   if total > 0 then
     return "🔴" .. tostring(total) .. " "
@@ -254,8 +255,9 @@ end
 function GetErrorLines()
   local max_lines = 5
   local bufnr = vim.api.nvim_get_current_buf()
-  -- Get all diagnostics for the buffer, filtered by severity = ERROR
-  local diagnostics = vim.diagnostic.get(bufnr)
+  
+  -- Get diagnostics filtered strictly for ERRORS
+  local diagnostics = vim.diagnostic.get(bufnr, { severity = vim.diagnostic.severity.ERROR })
 
   if #diagnostics == 0 then
     return ""
@@ -280,7 +282,7 @@ function GetErrorLines()
     return ""
   end
 
-  table.sort(unique_lines) -- optional: sort lines ascending
+  table.sort(unique_lines) 
 
   return "Lines " .. table.concat(unique_lines, ", ") .. "... "
 end
