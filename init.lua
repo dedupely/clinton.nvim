@@ -299,7 +299,7 @@ vim.o.showtabline = 0
 -- Line numbers that one can see
 vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = 'white' })
 vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = 'white' })
-vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#15616D', bold = true })
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = 'green', bold = true })
 
 -- Behavior
 vim.opt.hlsearch = true           -- Highlight search results
