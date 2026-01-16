@@ -298,6 +298,8 @@ vim.o.showtabline = 0
 
 -- Line numbers that one can see
 vim.api.nvim_set_hl(0, 'LineNr', { fg = 'white', bold = true, force = true })
+vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = 'white', bold = true, force = true })
+vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = 'white', bold = true, force = true })
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = 'orange', bold = true })
 
 -- Behavior
