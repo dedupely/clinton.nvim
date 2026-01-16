@@ -23,7 +23,7 @@ require('lazy').setup({
   {
     'nvim-treesitter/nvim-treesitter',
     config = function()
-      require('nvim-treesitter.configs').setup({
+      require('nvim-treesitter.config').setup({
         -- Add svelte to this list
         ensure_installed = { 'lua', 'javascript', 'typescript', 'html', 'css', 'svelte', 'prisma', 'bash' },
         sync_install = false,
