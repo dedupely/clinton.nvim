@@ -130,6 +130,7 @@ vim.api.nvim_create_user_command(
 
 keymap('n', '<leader>f', builtin.find_files, { desc = 'Find files' })
 keymap('n', '<leader>g', ':LiveGrepFixed<CR>', { desc = 'Live grep' })
+keymap('n', '<leader>r', builtin.resume, { desc = 'Resume last search' })
 
 -- Toggle floating terminal
 keymap('n', '<leader>t', '<cmd>ToggleTerm<CR>', { desc = 'Toggle terminal' })
