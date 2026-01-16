@@ -160,8 +160,7 @@ local function toggle_term_in_buf_dir()
       dir = buf_dir,
       direction = "float", 
       close_on_exit = true,
-      hidden = true,
-
+      hidden = true
     })
     term:toggle()
   else
@@ -175,8 +174,7 @@ keymap("n", "<leader>p", toggle_term_in_buf_dir, { noremap = true, silent = true
 vim.diagnostic.config({
   underline = true,
   virtual_text = true,
-  signs = true,
-  update_in_insert = true
+  signs = true
 });
 
 -- LSP
@@ -217,7 +215,7 @@ require('mason-lspconfig').setup()
 
 -- Setup language servers.
 require('mason-lspconfig').setup({
-	ensure_installed = { 'html', 'cssls', 'prismals', 'svelte', 'ts_ls', 'jsonls', 'lua_ls', 'bashls' }
+	ensure_installed = { 'html', 'cssls', 'prismals', 'svelte', 'vtsls', 'jsonls', 'lua_ls', 'bashls' }
 })
 
 keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.open_float()<CR>', { desc = "Toggle diagnotic" })
@@ -235,7 +233,7 @@ function GetDiagnosisCounts()
 end
 
 function GetErrorLines()
-  local max_lines = 3
+  local max_lines = 5
   local bufnr = vim.api.nvim_get_current_buf()
   -- Get all diagnostics for the buffer, filtered by severity = ERROR
   local diagnostics = vim.diagnostic.get(bufnr)
