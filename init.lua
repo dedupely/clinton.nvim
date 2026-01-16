@@ -109,7 +109,7 @@ require('lazy').setup({
 
 vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
-require("comfy-line-numbers").setup();
+//require("comfy-line-numbers").setup();
 require("auto-session").setup();
 require("scrollbar").setup();
 
