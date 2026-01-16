@@ -297,8 +297,8 @@ vim.opt.syntax = 'on'             -- Enable syntax highlighting
 vim.o.showtabline = 0
 
 -- Line numbers that one can see
-vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = 'white' })
-vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = 'white' })
+vim.api.nvim_set_hl(0, 'LineNrAbove', { fg = 'lightgray' })
+vim.api.nvim_set_hl(0, 'LineNrBelow', { fg = 'lightgray' })
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = 'orange', bold = true })
 
 -- Behavior
