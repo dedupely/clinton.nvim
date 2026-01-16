@@ -38,7 +38,7 @@ require('lazy').setup({
   { 'nvim-tree/nvim-web-devicons', lazy = true },
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.6', -- Pin to a stable version
+    tag = '0.1.x', -- Pin to a stable version
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       -- This is where you would configure telescope, if you wanted to
