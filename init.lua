@@ -44,7 +44,7 @@ require('lazy').setup({
         -- For now, we'll just load the fzf extension
         require('telescope').setup({
           defaults = {
-			path_display = { 'smart' },
+			path_display = { 'full' },
 		    
 		    -- 1. Use Vertical Layout (Stacks windows)
 		    layout_strategy = 'vertical',
